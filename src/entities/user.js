@@ -2,7 +2,8 @@ export default function buildMakeUser({ Id }) {
     return function makeUser({
         id = Id.makeId(),
         userName,
-        email
+        email,
+        runs = []
     } = {}) {
         if (!Id.isValidId(id)) {
             throw new Error('User must have a valid id.');
@@ -20,7 +21,8 @@ export default function buildMakeUser({ Id }) {
         return Object.freeze({
             getId: () => id,
             getUsername: () => userName,
-            getEmail: () => email
+            getEmail: () => email,
+            getRuns: () => runs
         });
     };
 }
