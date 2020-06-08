@@ -1,7 +1,7 @@
-import { makeRoute, makeUser } from '../entities';
+import { makeCircuit, makeUser } from '../entities';
 
-export default function makeGenerateRoute({ database, aiService }) {
-    return async function generateRoute(route, userId) {
+export default function makeGenerateCircuit({ database, aiService }) {
+    return async function generateCircuit(route, userId) {
         if (!userId) {
             throw new Error('You must supply an user id.');
         }

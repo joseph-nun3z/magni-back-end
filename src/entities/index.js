@@ -1,8 +1,8 @@
 import Id from '../Id';
 import buildMakeUser from './user';
-import buildMakeRoute from './route';
+import buildMakeCircuit from './circuit';
 
 const makeUser = buildMakeUser({ Id });
-const makeRoute = buildMakeRoute();
+const makeCircuit = buildMakeCircuit();
 
-export { makeUser, makeRoute };
+export { makeUser, makeCircuit };

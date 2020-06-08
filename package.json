@@ -15,7 +15,8 @@
         "express": "^4.17.1",
         "mongoose": "^5.9.16",
         "needle": "^2.5.0",
-        "nodemon": "^2.0.4"
+        "nodemon": "^2.0.4",
+        "prettier": "^2.0.5"
     },
     "nodemonConfig": {
         "restartable": "rs",

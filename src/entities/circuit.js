@@ -1,5 +1,5 @@
-export default function buildMakeRoute() {
-    return function makePoint({
+export default function buildMakeCircuit() {
+    return function makeCircuit({
         initialPoint,
         date = Date.now(),
         points,
@@ -15,7 +15,7 @@ export default function buildMakeRoute() {
 
         return Object.freeze({
             getInitialPoint: () => initialPoint,
-            getdate: () => date,
+            getDate: () => date,
             getPoints: () => points,
             getExpectedTime: () => expectedTime,
             getActualTime: () => actualTime

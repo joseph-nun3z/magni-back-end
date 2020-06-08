@@ -1,4 +1,4 @@
-import makeUser from '../entities';
+import { makeUser } from '../entities';
 
 export default function makeEditUser({ userDatabase }) {
     return async function editUser({ id, ...changes } = {}) {
