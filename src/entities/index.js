@@ -1,8 +1,5 @@
-import Id from '../Id';
-import buildMakeUser from './user';
-import buildMakeCircuit from './circuit';
+import makeUser from './user';
+import makeCircuit from './circuit';
+import makeRun from './run';
 
-const makeUser = buildMakeUser({ Id });
-const makeCircuit = buildMakeCircuit();
-
-export { makeUser, makeCircuit };
+export { makeRun, makeCircuit, makeUser };

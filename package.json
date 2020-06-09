@@ -31,35 +31,5 @@
         "eslint": "^7.1.0",
         "eslint-config-airbnb-base": "^14.1.0",
         "eslint-plugin-import": "^2.20.2"
-    },
-    "eslintConfig": {
-        "extends": "airbnb-base",
-        "env": {
-            "es6": true
-        },
-        "rules": {
-            "brace-style": [
-                "error",
-                "stroustrup"
-            ],
-            "no-console": "off",
-            "indent": [
-                "error",
-                4
-            ],
-            "comma-dangle": [
-                "error",
-                "never"
-            ],
-            "no-unused-vars": [
-                "warn"
-            ],
-            "no-var": [
-                "off"
-            ],
-            "one-var": [
-                "off"
-            ]
-        }
     }
 }

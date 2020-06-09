@@ -1,23 +1,13 @@
-import { makeUser } from '../entities';
-
-export default function makeEditUser({ userDatabase }) {
-    return async function editUser({ id, ...changes } = {}) {
+export default function makeEditUser({ userDb }) {
+    return async function editUser({ id, ...changes }) {
         if (!id) {
-            throw new Error('You must supply an id.');
+            throw new Error('You must provide an user ID');
         }
-
-        const existing = await userDatabase.findById({ id });
-
-        if (!existing) {
-            throw new RangeError('User not found');
+        const exists = await userDb.findById({ id });
+        if (!exists) {
+            throw new Error('User does not exist');
         }
-        const user = makeUser({ ...existing, ...changes });
-        const updated = await userDatabase.update({
-            id: user.getId(),
-            userName: user.getUsername(),
-            email: user.getEmail
-
-        });
-        return { ...existing, ...updated };
+        // eslint-disable-next-line no-return-await
+        return await userDb.update({ id, ...changes });
     };
 }
