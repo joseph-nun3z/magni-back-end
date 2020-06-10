@@ -4,7 +4,7 @@ export default function makeUserDb({ makeDb }) {
         addCircuit,
         updateRun,
         update
-    })
+    });
     async function findById({ id: _id }) {
         const db = await makeDb();
         return await db.collection('users').find({ _id });
@@ -15,12 +15,14 @@ export default function makeUserDb({ makeDb }) {
             .collection('users')
             .updateOne(
                 { _id },
-                { $push: { circuits: { ...circuit }}},
-                { returnOriginal: false}
+                { $push: { circuits: { ...circuit } } },
+                { returnOriginal: false }
             );
         return updated.result;
     }
-    async function updateRun({ userId, circuitId, runId, expectedTime }) {
+    async function updateRun({
+        userId, circuitId, runId, expectedTime
+    }) {
         /*
             const db = await makeDb();
             const user = await db.collection('users').findOneAndUpdate(
@@ -32,16 +34,15 @@ export default function makeUserDb({ makeDb }) {
                 }
          */
     }
-    async function update({ id: _id, ...changes}) {
+    async function update({ id: _id, ...changes }) {
         const db = await makeDb();
         const result = await db
             .collection('users')
             .findOneAndUpdate(
                 { _id },
-                { $set: { ...changes }},
-                { returnOriginal: false}
+                { $set: { ...changes } },
+                { returnOriginal: false }
             );
         return result.value;
     }
-
 }

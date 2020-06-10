@@ -7,7 +7,6 @@ export default function makeEditUser({ userDb }) {
         if (!exists) {
             throw new Error('User does not exist');
         }
-        // eslint-disable-next-line no-return-await
         return await userDb.update({ id, ...changes });
     };
 }

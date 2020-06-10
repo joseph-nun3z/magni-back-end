@@ -1,19 +1,12 @@
-import mongodb from 'mongodb';
-import makeUserDb from "./userDb";
+import moongoose from 'mongoose';
 import dotenv from 'dotenv';
+import makeUserDb from './userDb';
+
 dotenv.config();
 
 
-const MongoClient = mongodb.MongoClient;
-const url = process.env.DB_CONNECTION
-const client = new MongoClient(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+const url = process.env.DB_CONNECTION;
 
-export async function makeDb() {
-    if(!client.isConnected()) {
-        await client.connect();
-    }
-    return client.db()
+export default async function makeDb() {
+    return await moongoose(url, { useNewUrlParser: true });
 }

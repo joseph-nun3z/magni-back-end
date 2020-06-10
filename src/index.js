@@ -4,23 +4,22 @@ import {
     addUserController,
     addCircuitController,
     addRunController,
-    editUserController,
-    updateUserController
+    editUserController
 } from './controllers';
-const app = express();
-
-const mongoose = require('mongoose');
+import makeExpressCallback from './express-callback';
 
 const port = process.env.PORT || 3000;
+const app = express();
+app.use(bodyParser.json());
+
+// ROUTES
+app.post('/users', makeExpressCallback(addUserController));
+
+app.listen(port);
 
 require('dotenv/config');
 
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
 
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
     console.log('connected');
 });
-
-app.listen(port);
