@@ -17,6 +17,7 @@ export default function buildMakeCircuit({ Id, makeRun }) {
         }
         const validRuns = makeRun(runs);
         return Object.freeze({
+            getId: () => id,
             getInitialPoint: () => initialPoint,
             getRuns: () => validRuns,
             getDateAdded: () => dateAdded,

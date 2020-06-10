@@ -1,18 +1,23 @@
-export default function buildMakeRun() {
+export default function buildMakeRun({ Id }) {
     return function makeRun({
+        id = Id.makeId(),
         date = Date.now(),
         expectedTime,
         actualTime,
         completed = false,
         points = []
     } = {}) {
+        if (!id) {
+            throw new Error('User must have a valid id.');
+        }
+        if (!Id.isValidId(id)) {
+            throw new Error('Circuit must have a valid id');
+        }
         if (!expectedTime) {
             throw new Error('Run must have expected time');
         }
-        if (!actualTime) {
-            throw new Error('Run must have actual time');
-        }
         return Object.freeze({
+            getId: () => id,
             getDate: () => date,
             getActualTime: () => actualTime,
             getExpectedTime: () => expectedTime,

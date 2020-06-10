@@ -2,7 +2,7 @@ import { makeRun } from '../entities';
 
 export default function makeAddRun({ userDb }) {
     return async function addRun({
-        userId, circuitId, run, generatePoints
+        id, userId, circuitId, run, generatePoints
     }) {
         if (!circuitId) {
             throw new Error('You must provide circuit id');
@@ -23,7 +23,9 @@ export default function makeAddRun({ userDb }) {
         }
         return await userDb.addRun({
             run: {
+                id: mRun.getId(),
                 date: mRun.getDate(),
+                actualTime: mRun.getActualTime(),
                 expectedTime: mRun.expectedTime(),
                 points: mRun.getPoints()
             }

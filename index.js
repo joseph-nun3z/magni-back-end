@@ -1,5 +1,12 @@
-const express = require('express');
-
+import express from 'express';
+import bodyParser from 'body-parser';
+import {
+    addUserController,
+    addCircuitController,
+    addRunController,
+    editUserController,
+    updateUserController
+} from './controllers';
 const app = express();
 
 const mongoose = require('mongoose');
