@@ -1,7 +1,7 @@
 import Id from '../../Id';
 import buildMakeUser from './user';
-import makeCircuit from '../circuit';
+// import makeCircuit from '../circuit';
 
-const makeUser = buildMakeUser({ Id, makeCircuit });
+const makeUser = buildMakeUser({ Id });
 
 export default makeUser;

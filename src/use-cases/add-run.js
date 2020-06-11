@@ -2,7 +2,7 @@ import { makeRun } from '../entities';
 
 export default function makeAddRun({ userDb }) {
     return async function addRun({
-        id, userId, circuitId, run, generatePoints
+        userId, circuitId, run, generatePoints
     }) {
         if (!circuitId) {
             throw new Error('You must provide circuit id');

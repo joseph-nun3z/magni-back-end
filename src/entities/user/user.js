@@ -1,4 +1,4 @@
-export default function buildMakeUser({ Id, makeCircuit }) {
+export default function buildMakeUser({ Id }) {
     return function makeUser({
         id = Id.makeId(),
         userName,
@@ -18,15 +18,15 @@ export default function buildMakeUser({ Id, makeCircuit }) {
             throw new Error('User must have an email');
         }
 
-        const validCircuits = makeCircuit(circuits);
+        // const validCircuits = makeCircuit(circuits);
 
         return Object.freeze({
             getId: () => id,
             getUsername: () => userName,
             getEmail: () => email,
-            getCircuits: () => validCircuits,
+            getCircuits: () => circuits,
             getCircuit: (circuitId) => {
-                validCircuits.find((c) => c.id === circuitId);
+                circuits.find((c) => c.id === circuitId);
             }
         });
     };

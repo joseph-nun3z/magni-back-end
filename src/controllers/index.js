@@ -6,11 +6,11 @@ import {
     updateRun
 } from '../use-cases';
 
-import makeAddCircuitController from "./makeAddCircuitController";
-import makeAddRunController from "./makeAddRunController";
-import makeAddUserController from "./makeAddUserController";
-import makeEditUserController from "./makeEditUserController";
-import makeUpdateRunController from "./makeUpdateRunController"
+import makeAddCircuitController from './makeAddCircuitController';
+import makeAddRunController from './makeAddRunController';
+import makeAddUserController from './makeAddUserController';
+import makeEditUserController from './makeEditUserController';
+import makeUpdateRunController from './makeUpdateRunController';
 
 const addCircuitController = makeAddCircuitController({ addCircuit });
 const addRunController = makeAddRunController({ addRun });

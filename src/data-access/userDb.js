@@ -1,13 +1,9 @@
+import Id from '../Id';
+
 export default function makeUserDb({ makeDb }) {
-    return Object.freeze({
-        findById,
-        addCircuit,
-        updateRun,
-        update
-    });
     async function findById({ id: _id }) {
         const db = await makeDb();
-        return await db.collection('users').find({ _id });
+        return await db.collection('users').findOne({ _id });
     }
     async function addCircuit({ id: _id, circuit }) {
         const db = await makeDb();
@@ -34,6 +30,15 @@ export default function makeUserDb({ makeDb }) {
                 }
          */
     }
+    async function insert({ id: _id = Id.makeId(), ...userInfo }) {
+        console.log('########################## HERE ####################################');
+        const db = await makeDb();
+        const result = await db
+            .collection('users')
+            .insertOne({ _id, ...userInfo });
+        const { _id: id, ...insertedInfo } = result.ops[0];
+        return { id, ...insertedInfo };
+    }
     async function update({ id: _id, ...changes }) {
         const db = await makeDb();
         const result = await db
@@ -45,4 +50,11 @@ export default function makeUserDb({ makeDb }) {
             );
         return result.value;
     }
+    return Object.freeze({
+        findById,
+        addCircuit,
+        updateRun,
+        insert,
+        update
+    });
 }

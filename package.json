@@ -4,7 +4,9 @@
     "description": "",
     "main": "src/index.js",
     "scripts": {
-        "start": "nodemon --exec babel-node src/index.js"
+        "clean": "rimraf dist",
+        "db": "babel-node ./db/index.js",
+        "start": "yarn clean && yarn db && nodemon --exec babel-node src/index.js"
     },
     "author": "Joseph Nunez",
     "license": "ISC",
@@ -16,7 +18,7 @@
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "is-valid-email": "0.0.5",
-        "mongoose": "^5.9.16",
+        "mongodb": "^3.5.8",
         "needle": "^2.5.0",
         "nodemon": "^2.0.4"
     },
@@ -42,6 +44,7 @@
         "eslint-plugin-promise": "^4.0.1",
         "eslint-plugin-standard": "^4.0.0",
         "jest": "^26.0.1",
-        "prettier": "^2.0.5"
+        "prettier": "^2.0.5",
+        "rimraf": "^3.0.2"
     }
 }

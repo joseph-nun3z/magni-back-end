@@ -1,16 +1,17 @@
 import { makeUser } from '../entities';
 
-export default function makeAddUser({ userDatabase }) {
-    return async function addUser(userInfo) {
-        const user = makeUser(userInfo);
-        const exists = await userDatabase.findById({ id: user.getId() });
+export default function makeAddUser({ userDb }) {
+    return async function addUser({ user }) {
+        const mUser = makeUser(user);
+        const exists = await userDb.findById({ id: user.id });
         if (exists) {
+            console.log(exists);
             return exists;
         }
 
-        return userDatabase.insert({
-            userName: user.getUsername(),
-            email: user.getEmail()
+        return userDb.insert({
+            userName: mUser.getUsername(),
+            email: mUser.getEmail()
         });
     };
 }
