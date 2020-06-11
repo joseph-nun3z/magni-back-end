@@ -1,11 +1,11 @@
 export default function makeEditUserController({ editUser }) {
     return async function editUserController(httpRequest) {
         const headers = {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json'
         };
         try {
             const { name, email } = httpRequest.body;
-            const id = httpRequest.params.id;
+            const { id } = httpRequest.params;
             const user = await editUser({ id, name, email });
             return {
                 headers,
@@ -14,7 +14,8 @@ export default function makeEditUserController({ editUser }) {
                     id: user.getId()
                 }
             };
-        }catch (e) {
+        }
+        catch (e) {
             console.error(e);
             return {
                 headers,

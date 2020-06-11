@@ -16,6 +16,15 @@ export default function makeUserDb({ makeDb }) {
             );
         return updated.result;
     }
+    async function addRun({ id: _id, circuitId, run }) {
+        const db = await makeDb();
+        const updated = await db
+            .collection('users')
+            .updateOne(
+                { _id },
+                {}
+            );
+    }
     async function updateRun({
         userId, circuitId, runId, expectedTime
     }) {
@@ -53,6 +62,7 @@ export default function makeUserDb({ makeDb }) {
     return Object.freeze({
         findById,
         addCircuit,
+        addRun,
         updateRun,
         insert,
         update

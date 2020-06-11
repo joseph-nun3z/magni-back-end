@@ -1,7 +1,7 @@
 export default function makeAddCircuitController({ addCircuit }) {
     return async function addCircuitController(httpRequest) {
         const headers = {
-            'Content Type': 'application/json'
+            'Content-Type': 'application/json'
         };
         try {
             const { initialPoint, comment } = httpRequest.body;

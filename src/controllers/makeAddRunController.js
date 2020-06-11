@@ -5,8 +5,9 @@ export default function makeAddRunController({ addRun }) {
         };
         try {
             const { expectedTime } = httpRequest.body;
+            const { userId, circuitId } = httpRequest.params;
 
-            const run = await addRun({ run: { expectedTime } });
+            const run = await addRun({ userId, circuitId, run: { expectedTime } });
 
             return {
                 headers,

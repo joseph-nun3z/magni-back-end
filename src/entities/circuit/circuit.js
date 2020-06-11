@@ -1,4 +1,4 @@
-export default function buildMakeCircuit({ Id, makeRun }) {
+export default function buildMakeCircuit({ Id }) {
     return function makeCircuit({
         id = Id.makeId(),
         dateAdded = Date.now(),
@@ -15,11 +15,11 @@ export default function buildMakeCircuit({ Id, makeRun }) {
         if (!initialPoint) {
             throw new Error('Circuit must have an initial point');
         }
-        const validRuns = makeRun(runs);
+        // const validRuns = makeRun(runs);
         return Object.freeze({
             getId: () => id,
             getInitialPoint: () => initialPoint,
-            getRuns: () => validRuns,
+            getRuns: () => runs,
             getDateAdded: () => dateAdded,
             getComment: () => comment
         });
