@@ -1,19 +1,20 @@
-import { makeRun } from '../entities';
+import { makeRun, makeUser } from '../entities';
 
 export default function makeAddRun({ userDb, generatePoints }) {
     return async function addRun({
-        userId, circuitId, run
+        userId, cId, run
     }) {
-        if (!circuitId) {
+        if (!cId) {
             throw new Error('You must provide circuit id');
         }
         if (!userId) {
             throw new Error('You must provide user id');
         }
-        const user = await userDb.findById({ id: userId });
-        const circuit = user.circuits[circuitId];
+        let user = await userDb.findById({ id: userId });
+        user = await makeUser(user);
+        const circuit = user.getCircuit(cId);
         // const mPoints = generatePoints(circuit);
-        const mRun = makeRun({
+        const mRun = await makeRun({
             expectedTime: run.expectedTime
             //  points: mPoints
         });

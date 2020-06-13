@@ -14,16 +14,22 @@ export default function makeUserDb({ makeDb }) {
                 { $push: { circuits: { ...circuit } } },
                 { returnOriginal: false }
             );
-        return updated.result;
+        return circuit;
     }
-    async function addRun({ id: _id, circuitId, run }) {
+    async function addRun({ _id, cId, run }) {
         const db = await makeDb();
         const updated = await db
             .collection('users')
             .updateOne(
                 { _id },
-                {}
+                { $push: { circuits: { circuitId: cId, runs: { ...run } } } },
+                { returnOriginal: false },
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(res);
+                }
             );
+        return run;
     }
     async function updateRun({
         userId, circuitId, runId, expectedTime
@@ -40,7 +46,6 @@ export default function makeUserDb({ makeDb }) {
          */
     }
     async function insert({ id: _id = Id.makeId(), ...userInfo }) {
-        console.log('########################## HERE ####################################');
         const db = await makeDb();
         const result = await db
             .collection('users')

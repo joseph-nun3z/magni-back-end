@@ -5,11 +5,10 @@ export default function makeAddUser({ userDb }) {
         const mUser = makeUser(user);
         const exists = await userDb.findById({ id: user.id });
         if (exists) {
-            console.log(exists);
             return exists;
         }
 
-        return userDb.insert({
+        return await userDb.insert({
             userName: mUser.getUsername(),
             email: mUser.getEmail()
         });

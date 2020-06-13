@@ -11,7 +11,10 @@ export default function makeAddCircuitController({ addCircuit }) {
 
             return {
                 headers,
-                statusCode: circuit.nModified > 0 ? 200 : 500
+                statusCode: circuit.nModified > 0 ? 200 : 500,
+                body: {
+                    circuitId: circuit.circuitId
+                }
             };
         }
         catch (e) {

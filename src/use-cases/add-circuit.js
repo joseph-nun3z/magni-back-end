@@ -16,7 +16,7 @@ export default function makeAddCircuit({ userDb }) {
         }
         return await userDb.addCircuit({
             circuit: {
-                id: mCircuit.getId(),
+                circuitId: mCircuit.getId(),
                 dateAdded: mCircuit.getDateAdded(),
                 initialPoint: mCircuit.getInitialPoint(),
                 comment: mCircuit.getComment(),
