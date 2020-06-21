@@ -5,7 +5,7 @@ import {
     addUserController,
     addCircuitController,
     addRunController,
-    editUserController
+    updateRunController
 } from './controllers';
 import makeExpressCallback from './express-callback';
 
@@ -17,8 +17,9 @@ app.use(bodyParser.json());
 
 // ROUTES
 app.post('/users', makeExpressCallback(addUserController));
-app.post('/users/:id/circuits', makeExpressCallback(addCircuitController));
-app.post('/users/:userId/circuits/:cId/runs', makeExpressCallback(addRunController));
+app.post('/circuits/:user/', makeExpressCallback(addCircuitController));
+app.post('/circuits/:_id/runs', makeExpressCallback(addRunController));
+app.put('/circuits/:_id/runs/:runId', makeExpressCallback(updateRunController));
 
 app.listen(PORT, () => console.log(`Server started at port: ${PORT}`));
 

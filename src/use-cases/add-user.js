@@ -7,7 +7,6 @@ export default function makeAddUser({ userDb }) {
         if (exists) {
             return exists;
         }
-
         return await userDb.insert({
             userName: mUser.getUsername(),
             email: mUser.getEmail()

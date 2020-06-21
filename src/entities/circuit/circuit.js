@@ -1,15 +1,16 @@
 export default function buildMakeCircuit({ Id }) {
     return function makeCircuit({
-        circuitId = Id.makeId(),
+        id = Id.makeId(),
+        user,
         dateAdded = Date.now(),
         initialPoint,
         comment,
         runs = []
     } = {}) {
-        if (!circuitId) {
+        if (!id) {
             throw new Error('User must have a valid id.');
         }
-        if (!Id.isValidId(circuitId)) {
+        if (!Id.isValidId(id)) {
             throw new Error('Circuit must have a valid id');
         }
         if (!initialPoint) {
@@ -17,11 +18,13 @@ export default function buildMakeCircuit({ Id }) {
         }
         // const validRuns = makeRun(runs);
         return Object.freeze({
-            getId: () => circuitId,
+            getId: () => id,
+            getUser: () => user,
             getInitialPoint: () => initialPoint,
             getRuns: () => runs,
             getDateAdded: () => dateAdded,
-            getComment: () => comment
+            getComment: () => comment,
+            getRunById: (runId) => runs.find((run) => run.id === runId)
         });
     };
 }

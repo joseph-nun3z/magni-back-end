@@ -4,7 +4,6 @@ export default function buildMakeRun({ Id }) {
         date = Date.now(),
         expectedTime,
         actualTime,
-        completed = false,
         points = []
     } = {}) {
         if (!runId) {
@@ -21,10 +20,6 @@ export default function buildMakeRun({ Id }) {
             getDate: () => date,
             getActualTime: () => actualTime,
             getExpectedTime: () => expectedTime,
-            isCompleted: () => completed,
-            completeRun: () => {
-                completed = true;
-            },
             getPoints: () => points
         });
     };

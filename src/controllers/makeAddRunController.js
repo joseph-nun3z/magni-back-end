@@ -5,13 +5,13 @@ export default function makeAddRunController({ addRun }) {
         };
         try {
             const { expectedTime } = httpRequest.body;
-            const { userId, cId } = httpRequest.params;
+            const { _id } = httpRequest.params;
 
-            const run = await addRun({ userId, cId, run: { expectedTime } });
+            const mRun = await addRun({ _id, run: { expectedTime } });
 
             return {
                 headers,
-                statusCode: run.nModified > 0 ? 200 : 500
+                statusCode: mRun.nModified > 0 ? 200 : 500
             };
         }
         catch (e) {

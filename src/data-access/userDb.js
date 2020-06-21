@@ -1,51 +1,32 @@
-import Id from '../Id';
-
 export default function makeUserDb({ makeDb }) {
     async function findById({ id: _id }) {
         const db = await makeDb();
         return await db.collection('users').findOne({ _id });
     }
-    async function addCircuit({ id: _id, circuit }) {
+    async function findCircuitById({ id: _id }) {
+        const db = await makeDb();
+        return await db.collection('circuits').findOne({ _id });
+    }
+    async function addRun({ _id, run }) {
         const db = await makeDb();
         const updated = await db
-            .collection('users')
+            .collection('circuits')
             .updateOne(
                 { _id },
-                { $push: { circuits: { ...circuit } } },
+                { $push: { runs: { ...run } } },
                 { returnOriginal: false }
             );
-        return circuit;
+        return updated.result;
     }
-    async function addRun({ _id, cId, run }) {
+    async function addCircuit({ id: _id, ...circuitInfo }) {
         const db = await makeDb();
-        const updated = await db
-            .collection('users')
-            .updateOne(
-                { _id },
-                { $push: { circuits: { circuitId: cId, runs: { ...run } } } },
-                { returnOriginal: false },
-                (err, res) => {
-                    if (err) throw err;
-                    console.log(res);
-                }
-            );
-        return run;
+        const result = await db
+            .collection('circuits')
+            .insertOne({ _id, ...circuitInfo });
+        const { _id: id, ...insertedInfo } = result.ops[0];
+        return { id, ...insertedInfo };
     }
-    async function updateRun({
-        userId, circuitId, runId, expectedTime
-    }) {
-        /*
-            const db = await makeDb();
-            const user = await db.collection('users').findOneAndUpdate(
-                { "_id": userId, "circuits._id": circuitId, "run._id": runId }),
-                {
-                    "$set":{
-                        "runs.$.expectedTime": expectedTime
-                    }
-                }
-         */
-    }
-    async function insert({ id: _id = Id.makeId(), ...userInfo }) {
+    async function insert({ id: _id, ...userInfo }) {
         const db = await makeDb();
         const result = await db
             .collection('users')
@@ -64,11 +45,23 @@ export default function makeUserDb({ makeDb }) {
             );
         return result.value;
     }
+    async function updateTime({ _id, runId, actualTime }) {
+        const db = await makeDb();
+        const updated = await db
+            .collection('circuits')
+            .findOneAndUpdate(
+                { _id, 'runs.runId': runId },
+                { $set: { 'runs.$.actualTime': actualTime } },
+                { returnOriginal: false }
+            );
+        return updated;
+    }
     return Object.freeze({
         findById,
         addCircuit,
         addRun,
-        updateRun,
+        findCircuitById,
+        updateTime,
         insert,
         update
     });

@@ -1,35 +1,30 @@
-import { makeRun, makeUser } from '../entities';
+import { makeRun } from '../entities';
 
 export default function makeAddRun({ userDb, generatePoints }) {
     return async function addRun({
-        userId, cId, run
+        _id, run
     }) {
-        if (!cId) {
+        if (!_id) {
             throw new Error('You must provide circuit id');
         }
-        if (!userId) {
-            throw new Error('You must provide user id');
+        const circuit = await userDb.findCircuitById({ id: _id });
+        if (!circuit) {
+            throw new Error('Circuit not found');
         }
-        let user = await userDb.findById({ id: userId });
-        user = await makeUser(user);
-        const circuit = user.getCircuit(cId);
-        // const mPoints = generatePoints(circuit);
+        // TODO const mPoints = generatePoints(circuit);
         const mRun = await makeRun({
             expectedTime: run.expectedTime
-            //  points: mPoints
+            // TODO points: mPoints
         });
-
-        if (circuit && run.points[0] !== circuit.getInitialPoint()) {
-            throw new Error('initial point does not coincide');
-        }
         return await userDb.addRun({
             run: {
-                id: mRun.getId(),
+                runId: mRun.getId(),
                 date: mRun.getDate(),
                 actualTime: mRun.getActualTime(),
-                expectedTime: mRun.expectedTime,
+                expectedTime: mRun.getExpectedTime(),
                 points: mRun.getPoints()
-            }
+            },
+            _id
         });
     };
 }

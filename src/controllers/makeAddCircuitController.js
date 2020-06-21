@@ -5,15 +5,15 @@ export default function makeAddCircuitController({ addCircuit }) {
         };
         try {
             const { initialPoint, comment } = httpRequest.body;
-            const { id } = httpRequest.params;
+            const { user } = httpRequest.params;
 
-            const circuit = await addCircuit({ id, circuit: { initialPoint, comment } });
+            const circuit = await addCircuit({ circuit: { user, initialPoint, comment } });
 
             return {
                 headers,
                 statusCode: circuit.nModified > 0 ? 200 : 500,
                 body: {
-                    circuitId: circuit.circuitId
+                    circuitId: circuit.id
                 }
             };
         }

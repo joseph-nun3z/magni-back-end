@@ -3,7 +3,7 @@ import {
     addRun,
     addUser,
     editUser,
-    updateRun
+    updateTime
 } from '../use-cases';
 
 import makeAddCircuitController from './makeAddCircuitController';
@@ -16,7 +16,7 @@ const addCircuitController = makeAddCircuitController({ addCircuit });
 const addRunController = makeAddRunController({ addRun });
 const addUserController = makeAddUserController({ addUser });
 const editUserController = makeEditUserController({ editUser });
-const updateRunController = makeUpdateRunController({ updateRun });
+const updateRunController = makeUpdateRunController({ updateTime });
 
 const userControllers = Object.freeze({
     addCircuitController,

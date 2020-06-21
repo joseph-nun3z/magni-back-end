@@ -1,16 +1,22 @@
-export default function makeUpdateRunController({ updateRun }) {
+export default function makeUpdateRunController({ updateTime }) {
     return async function updateRunController(httpRequest) {
         const headers = {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json'
         };
         try {
-            const { userId, circuitId, actualTime } = httpRequest.body;
-            const run = await updateRun({ userId, circuitId, actualTime });
-            return  {
+            const { _id, runId } = httpRequest.params;
+            const { actualTime } = httpRequest.body;
+
+            const run = await updateTime({
+                _id, runId, actualTime
+            });
+
+            return {
                 headers,
-                statusCode: run.nModified > 0 ? 200 : 500
+                statusCode: run ? 200 : 500
             };
-        } catch (e) {
+        }
+        catch (e) {
             console.log(e);
             return {
                 headers,
