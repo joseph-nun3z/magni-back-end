@@ -47,14 +47,13 @@ export default function makeUserDb({ makeDb }) {
     }
     async function updateTime({ _id, runId, actualTime }) {
         const db = await makeDb();
-        const updated = await db
+        return await db
             .collection('circuits')
             .findOneAndUpdate(
                 { _id, 'runs.runId': runId },
                 { $set: { 'runs.$.actualTime': actualTime } },
                 { returnOriginal: false }
             );
-        return updated;
     }
     return Object.freeze({
         findById,
