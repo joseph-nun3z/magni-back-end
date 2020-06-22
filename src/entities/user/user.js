@@ -24,7 +24,7 @@ export default function buildMakeUser({ Id }) {
             getEmail: () => email,
             getCircuits: () => circuits,
             getCircuit: (circuitId) => {
-                circuits.find((circuit) => circuit.circuitId === circuitId);
+                circuits.find((circuit) => circuit.id === circuitId);
             }
         });
     };

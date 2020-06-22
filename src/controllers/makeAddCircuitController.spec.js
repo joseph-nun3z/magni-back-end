@@ -3,7 +3,7 @@ import makeFakeCircuit from '../../__test__/fixtures/circuit';
 
 describe('add circuit controller', () => {
     it('successfully add a circuit', async () => {
-        const addCircuitController = makeAddCircuitController({ addCircuit: (c) => c.circuit });
+        const addCircuitController = makeAddCircuitController({ addCircuit: (c) => c });
         const circuit = makeFakeCircuit();
         const request = {
             headers: { 'Content-Type': 'application/json' },

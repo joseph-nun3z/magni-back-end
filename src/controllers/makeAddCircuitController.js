@@ -5,8 +5,7 @@ export default function makeAddCircuitController({ addCircuit }) {
         };
         try {
             const { ...circuitInfo } = httpRequest.body;
-            const { user } = httpRequest.params;
-            const circuit = await addCircuit({ circuit: { user, ...circuitInfo } });
+            const circuit = await addCircuit({ ...circuitInfo });
             return {
                 headers,
                 statusCode: circuit ? 200 : 500,
