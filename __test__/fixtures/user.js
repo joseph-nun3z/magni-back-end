@@ -9,7 +9,7 @@ const Id = Object.freeze({
 export default function makeFakeUser(overrides) {
     const user = {
         id: Id.makeId(),
-        username: faker.name.findName(),
+        username: faker.internet.userName(),
         email: faker.internet.email(),
         circuits: []
     };

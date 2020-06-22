@@ -10,7 +10,7 @@ export default function makeAddCircuit({ userDb }) {
         if (!user) {
             throw new Error('User not found');
         }
-        return await userDb.addCircuit({
+        return userDb.addCircuit({
             _id: mCircuit.getId(),
             user: mCircuit.getUser(),
             dateAdded: mCircuit.getDateAdded(),

@@ -4,16 +4,14 @@ export default function makeAddCircuitController({ addCircuit }) {
             'Content-Type': 'application/json'
         };
         try {
-            const { initialPoint, comment } = httpRequest.body;
+            const { ...circuitInfo } = httpRequest.body;
             const { user } = httpRequest.params;
-
-            const circuit = await addCircuit({ circuit: { user, initialPoint, comment } });
-
+            const circuit = await addCircuit({ circuit: { user, ...circuitInfo } });
             return {
                 headers,
-                statusCode: circuit.nModified > 0 ? 200 : 500,
+                statusCode: circuit ? 200 : 500,
                 body: {
-                    circuitId: circuit.id
+                    id: circuit.id
                 }
             };
         }

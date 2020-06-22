@@ -4,8 +4,8 @@ export default function makeAddUserController({ addUser }) {
             'Content-Type': 'application/json'
         };
         try {
-            const { username, email } = httpRequest.body;
-            const user = await addUser({ user: { username, email } });
+            const { ...userInfo } = httpRequest.body;
+            const user = await addUser({ ...userInfo });
             return {
                 headers,
                 statusCode: 200,
