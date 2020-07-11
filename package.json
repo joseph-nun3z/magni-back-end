@@ -7,7 +7,6 @@
         "clean": "rimraf dist",
         "db": "babel-node ./db/index.js",
         "test": "jest src",
-        "test-coveralls": "jest --coverage && coveralls < coverage/lcov.info",
         "start": "yarn clean && yarn db && nodemon --exec babel-node src/index.js"
     },
     "author": "Joseph Nunez",
@@ -43,7 +42,6 @@
         "@typescript-eslint/eslint-plugin": "^3.0.2",
         "@typescript-eslint/parser": "^3.0.2",
         "babel-jest": "^26.0.1",
-        "coveralls": "^3.1.0",
         "eslint": "^7.1.0",
         "eslint-config-airbnb-base": "^14.1.0",
         "eslint-plugin-import": "^2.20.2",
