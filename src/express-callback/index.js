@@ -20,6 +20,6 @@ module.exports = function makeExpressCallback(controller) {
                 res.type('json');
                 res.status(httpResponse.statusCode).send(httpResponse.body);
             })
-            .catch((e) => res.status(500).send({ error: `An unknown error occurred ${e}` }));
+            .catch((e) => res.status(500).send({ error: 'An unknown error occurred' }));
     };
 };

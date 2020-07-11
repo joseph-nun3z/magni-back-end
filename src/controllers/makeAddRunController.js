@@ -4,10 +4,10 @@ export default function makeAddRunController({ addRun }) {
             'Content-Type': 'application/json'
         };
         try {
-            const { expectedTime } = httpRequest.body;
+            const { ...runInfo } = httpRequest.body;
             const { _id } = httpRequest.params;
 
-            const mRun = await addRun({ _id, run: { expectedTime } });
+            const mRun = await addRun(_id, { ...runInfo });
 
             return {
                 headers,

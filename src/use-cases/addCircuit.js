@@ -2,7 +2,6 @@ import { makeCircuit } from '../entities';
 
 export default function makeAddCircuit({ userDb }) {
     return async function addCircuit(circuitInfo) {
-        console.log(circuitInfo);
         if (!circuitInfo.user) {
             throw new Error('You must provide the user id you want to add the circuit to');
         }

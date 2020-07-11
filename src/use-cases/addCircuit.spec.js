@@ -1,4 +1,4 @@
-import makeAddCircuit from './add-circuit';
+import makeAddCircuit from './addCircuit';
 import makeUserDb from '../data-access/userDb';
 import makeFakeCircuit from '../../__test__/fixtures/circuit';
 import buildConnection from '../../__test__/fixtures/Db';

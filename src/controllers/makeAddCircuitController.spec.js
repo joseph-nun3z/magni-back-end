@@ -7,7 +7,6 @@ describe('add circuit controller', () => {
         const circuit = makeFakeCircuit();
         const request = {
             headers: { 'Content-Type': 'application/json' },
-            params: { user: circuit.user },
             body: circuit
         };
         const expected = {
@@ -27,7 +26,6 @@ describe('add circuit controller', () => {
         const circuit = makeFakeCircuit();
         const request = {
             headers: { 'Content-Type': 'application/json' },
-            params: { user: circuit.user },
             body: circuit
         };
         const expected = {

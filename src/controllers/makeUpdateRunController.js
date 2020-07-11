@@ -13,7 +13,7 @@ export default function makeUpdateRunController({ updateTime }) {
 
             return {
                 headers,
-                statusCode: run ? 200 : 500
+                statusCode: run.value ? 200 : 500
             };
         }
         catch (e) {

@@ -1,9 +1,7 @@
 import { makeRun } from '../entities';
 
 export default function makeAddRun({ userDb, generatePoints }) {
-    return async function addRun({
-        _id, run
-    }) {
+    return async function addRun(_id, runInfo) {
         if (!_id) {
             throw new Error('You must provide circuit id');
         }
@@ -12,11 +10,8 @@ export default function makeAddRun({ userDb, generatePoints }) {
             throw new Error('Circuit not found');
         }
         // TODO const mPoints = generatePoints(circuit);
-        const mRun = await makeRun({
-            expectedTime: run.expectedTime
-            // TODO points: mPoints
-        });
-        return await userDb.addRun({
+        const mRun = await makeRun(runInfo);
+        return userDb.addRun({
             run: {
                 runId: mRun.getId(),
                 date: mRun.getDate(),
@@ -24,7 +19,7 @@ export default function makeAddRun({ userDb, generatePoints }) {
                 expectedTime: mRun.getExpectedTime(),
                 points: mRun.getPoints()
             },
-            _id
+            id: _id
         });
     };
 }

@@ -7,7 +7,7 @@ export default function buildMakeRun({ Id }) {
         points = []
     } = {}) {
         if (!runId) {
-            throw new Error('User must have a valid id.');
+            throw new Error('Run must have a valid id.');
         }
         if (!Id.isValidId(runId)) {
             throw new Error('Circuit must have a valid id');
