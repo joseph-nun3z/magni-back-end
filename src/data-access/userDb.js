@@ -24,7 +24,6 @@ export default function makeUserDb({ makeDb }) {
             .collection('circuits')
             .insertOne({ _id, ...circuitInfo });
         const { _id: id, ...insertedInfo } = result.ops[0];
-        // eslint-disable-next-line no-underscore-dangle
         return { id, ...insertedInfo };
     }
     async function insert({ id: _id, ...userInfo }) {
@@ -36,16 +35,14 @@ export default function makeUserDb({ makeDb }) {
         return { id, ...insertedInfo };
     }
     async function updateTime({ id: _id, runId, actualTime }) {
-        // console.log(_id, runId, actualTime);
         const db = await makeDb();
-        const updated = await db
+        return await db
             .collection('circuits')
             .findOneAndUpdate(
                 { _id, 'runs.runId': runId },
                 { $set: { 'runs.$.actualTime': actualTime } },
                 { returnOriginal: false }
             );
-        return updated;
     }
     return Object.freeze({
         findById,
