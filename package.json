@@ -7,6 +7,7 @@
         "clean": "rimraf dist",
         "db": "babel-node ./db/index.js",
         "test": "jest src",
+        "test-coveralls": "jest --coverage && coveralls < coverage/lcov.info",
         "start": "yarn clean && yarn db && nodemon --exec babel-node src/index.js"
     },
     "author": "Joseph Nunez",
